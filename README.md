@@ -47,6 +47,8 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 ## Resources
 
-[Animate and scroll](https://codepen.io/alvarotrigo/pen/PoKamZy).
-[React animate](https://www.npmjs.com/package/react-scroll-parallax)
-[GitHub pages deploy](https://github.com/gitname/react-gh-pages)
+[Animate and scroll](https://codepen.io/alvarotrigo/pen/PoKamZy),
+[React animate](https://www.npmjs.com/package/react-scroll-parallax),
+[GitHub pages deploy](https://github.com/gitname/react-gh-pages),
+[Components](https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/class_components/),
+[Router](https://create-react-app.dev/docs/adding-a-router/)

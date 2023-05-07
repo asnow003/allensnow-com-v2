@@ -1,3 +1,5 @@
 {
-    "app.button" : "Hello world! US"
+    "app.button" : "Hello world! US",
+    "app.home" : "Home",
+    "app.about" : "About"
 }

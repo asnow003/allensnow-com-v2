@@ -1,14 +1,14 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.scss';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import "./index.scss";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
 import { initializeApp } from "firebase/app";
 import { getAnalytics, logEvent } from "firebase/analytics";
-import {IntlProvider} from 'react-intl';
+import { IntlProvider } from "react-intl";
 
-import English from './resources/strings/en-US.json';
-
+import English from "./resources/strings/en-US.json";
 
 // TODO: Replace the following with your app's Firebase project configuration
 // See: https://firebase.google.com/docs/web/learn-more#config-object
@@ -19,7 +19,7 @@ const firebaseConfig = {
   storageBucket: "allensnowcom.appspot.com",
   messagingSenderId: "24515259412",
   appId: "1:24515259412:web:a1fa95ddf11f9fe39c0b01",
-  measurementId: "G-VD1MQXTCCL"
+  measurementId: "G-VD1MQXTCCL",
 };
 
 const locale = navigator.language;
@@ -30,15 +30,17 @@ const app = initializeApp(firebaseConfig);
 // Initialize Analytics and get a reference to the service
 const analytics = getAnalytics(app);
 
-logEvent(analytics, 'notification_received');
+logEvent(analytics, "notification_received");
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById("root") as HTMLElement
 );
 root.render(
-  <IntlProvider locale ={locale} messages={English}>
+  <IntlProvider locale={locale} messages={English}>
     <React.StrictMode>
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </React.StrictMode>
   </IntlProvider>
 );
