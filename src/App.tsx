@@ -6,7 +6,7 @@ import { Layout, Home, About } from "./components";
 function App() {
   return (
     <div className="App">
-      hello
+      <canvas id="canvas"></canvas>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
