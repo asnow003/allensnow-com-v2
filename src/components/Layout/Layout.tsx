@@ -9,10 +9,6 @@ background.draw();
 
 class Layout extends Component {
   render() {
-
-
-
-
     return (
       <div className="Layout">
         <nav>
