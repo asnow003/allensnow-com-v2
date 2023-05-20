@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/allensnow-com-v2/static/css/main.70785356.css",
+    "main.js": "/allensnow-com-v2/static/js/main.1127441e.js",
+    "static/js/787.02772445.chunk.js": "/allensnow-com-v2/static/js/787.02772445.chunk.js",
+    "index.html": "/allensnow-com-v2/index.html",
+    "main.70785356.css.map": "/allensnow-com-v2/static/css/main.70785356.css.map",
+    "main.1127441e.js.map": "/allensnow-com-v2/static/js/main.1127441e.js.map",
+    "787.02772445.chunk.js.map": "/allensnow-com-v2/static/js/787.02772445.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.70785356.css",
+    "static/js/main.1127441e.js"
+  ]
+}
