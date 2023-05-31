@@ -1,12 +1,22 @@
-const a = (2 * Math.PI) / 6;
-const r = 50;
+import IBackground from "../../interfaces/IBackground";
+import IBackgroundTile from "../../interfaces/IBackgroundTile";
+import INavigationItem from "../../interfaces/INavigationItem";
+import IPosition from "../../interfaces/IPosition";
 
-export class Background {
+import shuttleImg from "../../resources/images/shuttle.png";
+
+const a = (2 * Math.PI) / 6;
+const r = 30;
+
+export class Background implements IBackground  {
   canvas: HTMLCanvasElement;
   ctx: CanvasRenderingContext2D | null;
+  tiles: IBackgroundTile[];
+  navItems: INavigationItem[];
 
-  constructor() {
-    console.log("Background - constructor");
+  constructor(navItems: INavigationItem[]) {
+    this.tiles = [];
+    this.navItems = navItems;
 
     if (document.getElementById("background")) {
       this.canvas = document.getElementById("background") as HTMLCanvasElement;
@@ -27,6 +37,8 @@ export class Background {
 
     this.ctx = this.canvas.getContext("2d");
     document.body.appendChild(this.canvas);
+
+    this.draw();
   }
 
   drawGrid(width: number, height: number) {
@@ -34,16 +46,16 @@ export class Background {
     if (!this.ctx) return;
 
     this.ctx.strokeStyle = "#cccccc";
-    this.ctx.lineWidth = 0.2;
+    this.ctx.lineWidth = 0.5;
 
-    for (let i = 0; i < width; i += 10) {
+    for (let i = 0; i < width; i += 50) {
       this.ctx.beginPath();
       this.ctx.moveTo(i, 0);
       this.ctx.lineTo(i, height);
       this.ctx.stroke();
     }
 
-    for (let i = 0; i < height; i += 10) {
+    for (let i = 0; i < height; i += 50) {
       this.ctx.beginPath();
       this.ctx.moveTo(0, i);
       this.ctx.lineTo(width, i);
@@ -52,6 +64,10 @@ export class Background {
   }
 
   drawHexagonGrid(width: number, height: number) {
+    if (!this.ctx) return;
+    
+    this.ctx.save();
+
     const hexagonHeight = this.calculateHexagonHeight();
 
     const columns = Math.floor(width / (1.5 * r)) + 2;
@@ -62,9 +78,15 @@ export class Background {
       for (let j = 0; j < rows; j++) {
         const calcY = (j * hexagonHeight) + (i % 2 === 0 ? 0 : (0.5 * hexagonHeight)) - (hexagonHeight / 2);
         const color = '#'+(0x1000000+Math.random()*0xffffff).toString(16).substr(1,6);
-        this.drawHexagon(calcX, calcY, color);
+        
+        const tile = this.drawHexagon(calcX, calcY, color);
+        if (tile) {
+          this.tiles.push(tile);
+        }
       }
     }
+
+    this.ctx.restore();
   }
 
   calculateHexagonHeight(): number {
@@ -77,45 +99,110 @@ export class Background {
       return height;    
   }
 
-  drawHexagon(x: number, y: number, fillStyle?: string) {
+  drawHexagon(x: number, y: number, fillStyle?: string): IBackgroundTile | undefined {
     if (!this.ctx) return;
-      
-    // shift to place at correct position
-    x = x + r;
-    y = y + (0.5 * this.calculateHexagonHeight());
+    
+    const hexagonHeight = this.calculateHexagonHeight();
 
-    this.ctx.fillStyle = fillStyle || "#cccccc";
+    // shift to place at correct position
+    const xOffset = x + r;
+    const yOffset = y + (0.5 * hexagonHeight);
+
+    const color = fillStyle || "#cccccc"
+
+    const tile: IBackgroundTile = {
+      position: {
+        x: x,
+        y: y,
+      },
+      color: color,
+      width: r * 2,
+      height: hexagonHeight,
+      path: [],
+    } as IBackgroundTile;
+
+    this.ctx.fillStyle = color;
 
     this.ctx.beginPath();
+
     for (let i = 0; i < 6; i++) {
-      this.ctx.lineTo(x + r * Math.cos(a * i), y + r * Math.sin(a * i));
+      
+      const xPos = xOffset + r * Math.cos(a * i);
+      const yPos = yOffset + r * Math.sin(a * i);
+
+      this.ctx.lineTo(xPos, yPos);
+      tile.path.push({ x: xPos, y: yPos });
     }
+
     this.ctx.closePath();
     this.ctx.stroke();
     this.ctx.fill();
+
+    return tile;
+  }
+
+  private getTilesInArea(origin: IPosition, width: number, height: number): IBackgroundTile[] {
+    const tiles: IBackgroundTile[] = [];
+
+    for (let i = 0; i < this.tiles.length; i++) {
+      const tile = this.tiles[i];
+      if (tile.position.x >= origin.x && tile.position.x <= origin.x + width && tile.position.y >= origin.y && tile.position.y <= origin.y + height) {
+        tiles.push(tile);
+      }
+    }
+
+    return tiles;
+  }
+
+  drawNavigationItems() {
+    if (!this.ctx) return;
+
+    const localCTX = this.ctx;
+
+    this.ctx.save();
+
+    const tiles = this.getTilesInArea({ x: 50, y: 50 }, 200, 100);
+    for(let i = 0; i < tiles.length; i++) {
+      const tile = tiles[i];
+      this.drawHexagon(tile.position.x, tile.position.y, "#ffffff");
+    }
+
+    var shuttle = new Image();
+    shuttle.src = shuttleImg; 
+
+    shuttle.addEventListener('load', function() {
+      // Draw the image on the canvas once it's loaded
+      localCTX.drawImage(shuttle, 300, 300);
+      console.log("loaded");
+    });
+    
+
+
+    for (let i = 0; i < this.navItems.length; i++) {
+      const navItem = this.navItems[i];
+      const tile = this.tiles[i];
+
+      if (tile) {
+        this.ctx.fillStyle = "#ffffff";
+        this.ctx.font = "20px Arial";
+        this.ctx.textAlign = "center";
+        this.ctx.textBaseline = "middle";
+        this.ctx.fillText(navItem.name, tile.position.x + (tile.width / 2), tile.position.y + (tile.height / 2));
+      }
+
+    }
+
+    this.ctx.restore();
   }
 
   draw() {
-    console.log("Background - draw");
-
     if (!this.ctx) return;
     this.ctx.fillStyle = "#eeeeee";
 
-    // console.log(this.canvas.width, this.canvas.height);
-
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
     this.drawHexagonGrid(this.canvas.width, this.canvas.height);
-    /*
-    const height = this.calculateHexagonHeight();
-    console.log(height);
-    this.drawHexagon(0, 0);
-    this.drawHexagon(0, 0 + height);
-    this.drawHexagon(0, 0 + (2 *height));
+    this.drawNavigationItems();
 
-    this.drawHexagon(0 + (1.5 * r), 0 + (0.5 * height));
-    this.drawHexagon(0 + (1.5 * r), 0 + (1.5 * height));
-    this.drawHexagon(0 + (1.5 * r), 0 + (2.5 * height));
-    */
-    // this.drawGrid(this.canvas.width, this.canvas.height);
+    this.drawGrid(this.canvas.width, this.canvas.height);
   }
 }

@@ -3,10 +3,11 @@ import { Background } from "./Background";
 // import logo from "../../logo.svg";
 import { Outlet, Link } from "react-router-dom";
 import "./Layout.scss";
+import INavigationItem from "../../interfaces/INavigationItem";
+import * as navigation from "../../resources/content/navigation.json";
 
-const background = new Background();
-background.draw();
-
+const navItems = JSON.parse(JSON.stringify(navigation)) as INavigationItem[];
+const background = new Background(navItems);
 class Layout extends Component {
   render() {
     return (
