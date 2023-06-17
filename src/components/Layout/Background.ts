@@ -285,6 +285,6 @@ export class Background implements IBackground  {
     this.drawHexagonGrid(this.canvas.width, this.canvas.height);
     this.drawNavigationItems();
 
-    this.drawGrid(this.canvas.width, this.canvas.height);
+    // this.drawGrid(this.canvas.width, this.canvas.height);
   }
 }
