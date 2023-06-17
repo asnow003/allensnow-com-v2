@@ -6,7 +6,7 @@ import IPosition from "../../interfaces/IPosition";
 import shuttleImg from "../../resources/images/shuttle.png";
 
 const a = (2 * Math.PI) / 6;
-const r = 30;
+const r = 10;
 
 export class Background implements IBackground  {
   canvas: HTMLCanvasElement;
@@ -141,12 +141,58 @@ export class Background implements IBackground  {
     return tile;
   }
 
+  private mergeTiles(tiles: IBackgroundTile[]): IBackgroundTile[] {
+
+    const mergedTiles: IBackgroundTile[] = [];
+
+    for (let i = 0; i < tiles.length; i++) {
+
+      const tile = tiles[i];
+
+      const existingTile = mergedTiles.find((t) => t.position.x === tile.position.x && t.position.y === tile.position.y);
+
+      if (existingTile) {
+        existingTile.path = existingTile.path.concat(tile.path);
+      } else {
+        mergedTiles.push(tile);
+      }
+    }
+
+    return mergedTiles;
+  }
+
+  private getPerimeterOfTiles(tiles: IBackgroundTile[]): IPosition[] {
+    const perimeter: IPosition[] = [];
+
+    for (let i = 0; i < tiles.length; i++) {
+      const tile = tiles[i];
+
+      for (let j = 0; j < tile.path.length; j++) {
+        const path = tile.path[j];
+
+        if (perimeter.findIndex((p) => p.x === path.x && p.y === path.y) === -1) {
+          perimeter.push(path);
+        }
+      }
+    }
+
+    return perimeter;
+  }
+
   private getTilesInArea(origin: IPosition, width: number, height: number): IBackgroundTile[] {
     const tiles: IBackgroundTile[] = [];
 
     for (let i = 0; i < this.tiles.length; i++) {
       const tile = this.tiles[i];
-      if (tile.position.x >= origin.x && tile.position.x <= origin.x + width && tile.position.y >= origin.y && tile.position.y <= origin.y + height) {
+
+      let count = 0;
+      tile.path.forEach((position) => {
+        if (position.x >= origin.x && position.x <= origin.x + width && position.y >= origin.y && position.y <= origin.y + height) {
+          count++;
+        }
+      });
+
+      if (count >= 4) {
         tiles.push(tile);
       }
     }
@@ -157,11 +203,12 @@ export class Background implements IBackground  {
   drawNavigationItems() {
     if (!this.ctx) return;
 
+    const local = this;
     const localCTX = this.ctx;
 
     this.ctx.save();
 
-    const tiles = this.getTilesInArea({ x: 50, y: 50 }, 200, 100);
+    const tiles = this.getTilesInArea({ x: 100, y: 100 }, 200, 100);
     for(let i = 0; i < tiles.length; i++) {
       const tile = tiles[i];
       this.drawHexagon(tile.position.x, tile.position.y, "#ffffff");
@@ -172,8 +219,43 @@ export class Background implements IBackground  {
 
     shuttle.addEventListener('load', function() {
       // Draw the image on the canvas once it's loaded
-      localCTX.drawImage(shuttle, 300, 300);
-      console.log("loaded");
+      // localCTX.drawImage(shuttle, 100, 100, 200, 100);
+
+      // Define the path for masking
+      localCTX.save();
+      localCTX.beginPath();
+      
+      
+      const mask = tiles[0];
+      for (let i = 0; i < mask.path.length; i++) {
+        const path = mask.path[i];
+        if (i === 0) {  
+          localCTX.moveTo(path.x, path.y);
+        }
+
+        localCTX.lineTo(path.x, path.y);
+      }
+      
+
+
+
+
+      localCTX.closePath();
+
+      // Clip the canvas to the defined path
+      localCTX.clip();
+
+      // Clear the canvas
+      localCTX.clearRect(100, 100, 200, 100);
+
+      // Redraw the image (now clipped)
+      localCTX.drawImage(shuttle, 100, 100, 200, 100);
+
+      localCTX.restore();
+
+
+
+
     });
     
 
