@@ -1,15 +1,17 @@
 {
   "files": {
-    "main.css": "/allensnow-com-v2/static/css/main.70785356.css",
-    "main.js": "/allensnow-com-v2/static/js/main.1127441e.js",
+    "main.css": "/allensnow-com-v2/static/css/main.d03de48a.css",
+    "main.js": "/allensnow-com-v2/static/js/main.c6565a17.js",
     "static/js/787.02772445.chunk.js": "/allensnow-com-v2/static/js/787.02772445.chunk.js",
+    "static/media/avatar.png": "/allensnow-com-v2/static/media/avatar.948e20a6ab938ff95581.png",
+    "static/media/shuttle.png": "/allensnow-com-v2/static/media/shuttle.53498310b4ccf015d5c8.png",
     "index.html": "/allensnow-com-v2/index.html",
-    "main.70785356.css.map": "/allensnow-com-v2/static/css/main.70785356.css.map",
-    "main.1127441e.js.map": "/allensnow-com-v2/static/js/main.1127441e.js.map",
+    "main.d03de48a.css.map": "/allensnow-com-v2/static/css/main.d03de48a.css.map",
+    "main.c6565a17.js.map": "/allensnow-com-v2/static/js/main.c6565a17.js.map",
     "787.02772445.chunk.js.map": "/allensnow-com-v2/static/js/787.02772445.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.70785356.css",
-    "static/js/main.1127441e.js"
+    "static/css/main.d03de48a.css",
+    "static/js/main.c6565a17.js"
   ]
 }
