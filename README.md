@@ -47,6 +47,7 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 ## Resources
 
+[Components MUI](https://mui.com/)
 [Animate and scroll](https://codepen.io/alvarotrigo/pen/PoKamZy),
 [React animate](https://www.npmjs.com/package/react-scroll-parallax),
 [GitHub pages deploy](https://github.com/gitname/react-gh-pages),

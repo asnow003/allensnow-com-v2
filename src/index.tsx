@@ -8,7 +8,7 @@ import { initializeApp } from "firebase/app";
 import { getAnalytics, logEvent } from "firebase/analytics";
 import { IntlProvider } from "react-intl";
 
-import English from "./resources/strings/en-US.json";
+import English from "./assets/strings/en-US.json";
 
 // TODO: Replace the following with your app's Firebase project configuration
 // See: https://firebase.google.com/docs/web/learn-more#config-object

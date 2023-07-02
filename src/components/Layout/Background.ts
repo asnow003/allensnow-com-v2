@@ -3,7 +3,7 @@ import IBackgroundTile from "../../interfaces/IBackgroundTile";
 import INavigationItem from "../../interfaces/INavigationItem";
 import IPosition from "../../interfaces/IPosition";
 
-import shuttleImg from "../../resources/images/shuttle.png";
+import shuttleImg from "../../assets/images/shuttle.png";
 
 const a = (2 * Math.PI) / 6;
 const r = 10;
@@ -77,7 +77,7 @@ export class Background implements IBackground  {
       const calcX = (i * (1.5 * r)) - r;
       for (let j = 0; j < rows; j++) {
         const calcY = (j * hexagonHeight) + (i % 2 === 0 ? 0 : (0.5 * hexagonHeight)) - (hexagonHeight / 2);
-        const color = '#'+(0x1000000+Math.random()*0xffffff).toString(16).substr(1,6);
+        const color = '#fffde8' // '#'+(0x1000000+Math.random()*0xffffff).toString(16).substr(1,6);
         
         const tile = this.drawHexagon(calcX, calcY, color);
         if (tile) {

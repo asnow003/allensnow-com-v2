@@ -1,0 +1,44 @@
+[
+  {
+    "id": 0,
+    "name": "nav.projects",
+    "imageId": "shuttle",
+    "path": "/projects"
+  },
+  {
+    "id": 1,
+    "name": "nav.about",
+    "imageId": "shuttle",
+    "path": "/about"
+  },
+  {
+    "id": 0,
+    "name": "nav.projects",
+    "imageId": "shuttle",
+    "path": "/projects"
+  },
+  {
+    "id": 1,
+    "name": "nav.about",
+    "imageId": "shuttle",
+    "path": "/about"
+  },
+  {
+    "id": 0,
+    "name": "nav.projects",
+    "imageId": "shuttle",
+    "path": "/projects"
+  },
+  {
+    "id": 1,
+    "name": "nav.about",
+    "imageId": "shuttle",
+    "path": "/about"
+  },
+  {
+    "id": 1,
+    "name": "nav.about",
+    "imageId": "shuttle",
+    "path": "/about"
+  }
+]
