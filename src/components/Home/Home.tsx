@@ -33,7 +33,6 @@ class Home extends Component {
                       component="img"
                       height="194"
                       src={ImageMap[item.imageId]}
-                      alt="Paella dish"
                     />{" "}
                     <CardHeader
                       title={
@@ -49,6 +48,8 @@ class Home extends Component {
             </Grid>
           ))}
         </Grid>
+
+        
       </div>
     );
   }

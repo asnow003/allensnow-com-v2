@@ -1,11 +1,11 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import { Background } from "./Background";
-// import logo from "../../logo.svg";
 import Container from "@mui/material/Container";
 import { Outlet } from "react-router-dom";
 import "./Layout.scss";
 
 import IconButton from "@mui/material/IconButton";
+import HomeIcon from '@mui/icons-material/Home';
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import TwitterIcon from "@mui/icons-material/Twitter";
@@ -35,7 +35,6 @@ const Layout = () => {
   const navItems = JSON.parse(JSON.stringify(navigation)) as INavigationItem[];
 
   const drawerWidth = 240;
-  const navItems2 = ["Home", "About", "Contact"];
 
   const background = new Background(navItems);
 
@@ -58,6 +57,14 @@ const Layout = () => {
       </Typography>
       <Divider />
       <List>
+      <ListItem key={0} disablePadding>
+          <ListItemButton href="/">
+            <ListItemIcon>
+              <HomeIcon />
+            </ListItemIcon>
+            <ListItemText primary={"Home"} />
+          </ListItemButton>
+        </ListItem>
         <ListItem key={0} disablePadding>
           <ListItemButton>
             <ListItemIcon>

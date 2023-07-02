@@ -1,5 +1,9 @@
 {
-    "app.home" : "Home Page",
-    "nav.projects": "Projects",
+    "nav.home" : "Home",
+    "nav.wagglebum" : "Wagglebum Studios",
+    "nav.resume" : "Resume (CV)",
+    "nav.shuttle" : "Shuttle Run Game",
+    "nav.solitaire" : "Solitaire Game",
+    "nav.klusters" : "klusters iOS App",
     "nav.about" : "About"
 }

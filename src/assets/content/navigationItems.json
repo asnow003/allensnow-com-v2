@@ -1,42 +1,30 @@
 [
   {
     "id": 0,
-    "name": "nav.projects",
+    "name": "nav.resume",
     "imageId": "shuttle",
-    "path": "/projects"
+    "path": "/resume"
   },
   {
     "id": 1,
-    "name": "nav.about",
+    "name": "nav.shuttle",
     "imageId": "shuttle",
-    "path": "/about"
+    "path": "/shuttle"
   },
   {
-    "id": 0,
-    "name": "nav.projects",
+    "id": 2,
+    "name": "nav.solitaire",
     "imageId": "shuttle",
-    "path": "/projects"
+    "path": "/solitaire"
   },
   {
-    "id": 1,
-    "name": "nav.about",
+    "id": 3,
+    "name": "nav.klusters",
     "imageId": "shuttle",
-    "path": "/about"
+    "path": "/klusters"
   },
   {
-    "id": 0,
-    "name": "nav.projects",
-    "imageId": "shuttle",
-    "path": "/projects"
-  },
-  {
-    "id": 1,
-    "name": "nav.about",
-    "imageId": "shuttle",
-    "path": "/about"
-  },
-  {
-    "id": 1,
+    "id": 4,
     "name": "nav.about",
     "imageId": "shuttle",
     "path": "/about"
